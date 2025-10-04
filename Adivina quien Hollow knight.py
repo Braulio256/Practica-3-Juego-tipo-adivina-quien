@@ -47,6 +47,7 @@ base_inicial = {
     }
 }
 
+# Preguntas y sus claves asociadas
 preguntas = [
     "¿El arma que utiliza es un aguijón?",
     "¿El arma que utiliza es parte de la infección?",
@@ -54,8 +55,6 @@ preguntas = [
     "¿Tu personaje es un enemigo?",
     "¿Tu personaje aparece múltiples veces en el juego?"
 ]
-
-# Claves asociadas a cada pregunta
 claves = ["arma_aguijon", "arma_infeccion", "rol_jefe", "es_enemigo", "aparece_multiples"]
 
 # ======================================================
@@ -99,9 +98,9 @@ def mostrar_menu_respuesta(pregunta):
             elif opcion == 4:
                 return "Probablemente"
             else:
-                print("⚠️ Opción fuera de rango. Intenta de nuevo.")
+                print(" Opción fuera de rango. Intenta de nuevo.")
         except ValueError:
-            print("⚠️ Debes ingresar un número entre 1 y 4.")
+            print(" Debes ingresar un número entre 1 y 4.")
 
 def menu_confirmacion(pregunta):
     """Muestra un menú tipo switch (1–2) para preguntas de confirmación como '¿Adiviné?' o '¿Jugar de nuevo?'."""
@@ -116,9 +115,9 @@ def menu_confirmacion(pregunta):
             elif opcion == 2:
                 return "No"
             else:
-                print("⚠️ Opción fuera de rango. Intenta de nuevo.")
+                print(" Opción fuera de rango. Intenta de nuevo.")
         except ValueError:
-            print("⚠️ Debes ingresar un número (1 o 2).")
+            print(" Debes ingresar un número (1 o 2).")
 
 def obtener_respuestas():
     """Realiza las 5 preguntas al usuario y devuelve sus respuestas."""
@@ -142,11 +141,10 @@ def comparar_personaje(respuestas_usuario, caracteristicas_personaje):
 # LÓGICA PRINCIPAL DEL JUEGO
 # ======================================================
 
-"""Ejecución principal del juego."""
 while True:
     base = cargar_conocimiento()
 
-    print("\n🎮 Bienvenido a '¿Quién soy? - Hollow Knight Edition' 🦋")
+    print("\n Bienvenido a '¿Adivina quien? - Hollow Knight Edition' ")
     print("Piensa en un personaje del juego. Yo intentaré adivinarlo.")
     input("Presiona ENTER cuando estés listo...\n")
 
@@ -160,13 +158,12 @@ while True:
 
     # Obtener el personaje más probable
     mejor = max(puntajes, key=puntajes.get)
-    valor = puntajes[mejor]
 
-    print("\n🤔 Estoy pensando...")
+    print("\n Estoy pensando...")
     time.sleep(1.5)
 
-    # Mostrar resultado
-    print(f"\nCreo que tu personaje es: 🕵️‍♂️ {mejor} (confianza: {round(valor * 100, 1)}%)")
+    # Mostrar resultado sin porcentaje
+    print(f"\nCreo que tu personaje es: {mejor}")
 
     # Confirmación del usuario con menú
     confirmacion = menu_confirmacion("¿Adiviné tu personaje?")
@@ -177,11 +174,11 @@ while True:
         if jugar_nuevamente == "Si":
             continue
         else:
-            print("\n¡Gracias por jugar! 🌙")
+            print("\n¡Gracias por jugar! ")
             break
     else:
         # Si no adivina, aprender un nuevo personaje
-        print("\nVaya, parece que no acerté 😕")
+        print("\nVaya, parece que no acerté ")
         nombre_nuevo = input("¿Cuál era tu personaje?: ").strip()
         print(f"\nVamos a aprender sobre {nombre_nuevo}. Responde las siguientes preguntas:")
 
@@ -191,11 +188,11 @@ while True:
 
         base[nombre_nuevo] = nuevo_info
         guardar_conocimiento(base)
-        print(f"\n✅ He aprendido sobre {nombre_nuevo} para la próxima vez.")
+        print(f"\n He aprendido sobre {nombre_nuevo} para la próxima vez.")
 
         jugar_nuevamente = menu_confirmacion("\n¿Quieres jugar otra vez?")
         if jugar_nuevamente == "Si":
             continue
         else:
-            print("\n¡Gracias por ayudarme a aprender! 🌟")
+            print("\n¡Gracias por ayudarme a aprender!")
             break
