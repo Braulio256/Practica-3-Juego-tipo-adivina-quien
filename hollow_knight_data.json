@@ -1,0 +1,37 @@
+{
+    "Hornet": {
+        "arma_aguijon": "Si",
+        "arma_infeccion": "No",
+        "rol_jefe": "Si",
+        "es_enemigo": "No",
+        "aparece_multiples": "Si"
+    },
+    "Señores Mantis": {
+        "arma_aguijon": "Si",
+        "arma_infeccion": "No",
+        "rol_jefe": "Si",
+        "es_enemigo": "Si",
+        "aparece_multiples": "No"
+    },
+    "Zote": {
+        "arma_aguijon": "Si",
+        "arma_infeccion": "No",
+        "rol_jefe": "Si",
+        "es_enemigo": "No",
+        "aparece_multiples": "Si"
+    },
+    "Último Ciervo": {
+        "arma_aguijon": "No",
+        "arma_infeccion": "No",
+        "rol_jefe": "No",
+        "es_enemigo": "No",
+        "aparece_multiples": "Si"
+    },
+    "Rey Pálido": {
+        "arma_aguijon": "No",
+        "arma_infeccion": "No",
+        "rol_jefe": "No",
+        "es_enemigo": "No",
+        "aparece_multiples": "No"
+    }
+}
