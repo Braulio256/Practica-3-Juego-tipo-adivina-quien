@@ -1,6 +1,5 @@
 import json
 import os
-import platform
 import time
 
 # =========================================
@@ -56,25 +55,17 @@ preguntas = [
     "¿Tu personaje aparece múltiples veces en el juego?"
 ]
 
-# Claves que se asocian a cada pregunta (en orden)
+# Claves asociadas a cada pregunta
 claves = ["arma_aguijon", "arma_infeccion", "rol_jefe", "es_enemigo", "aparece_multiples"]
-
 
 # ======================================================
 # FUNCIONES DE UTILIDAD
 # ======================================================
 
-def limpiar_pantalla():
-    """Limpia la terminal dependiendo del sistema operativo."""
-    sistema = platform.system()
-    os.system("cls" if sistema == "Windows" else "clear")
-
-
 def guardar_conocimiento(base):
     """Guarda la base de conocimiento en el archivo JSON."""
     with open(ARCHIVO_CONOCIMIENTO, "w", encoding="utf-8") as f:
         json.dump(base, f, indent=4, ensure_ascii=False)
-
 
 def cargar_conocimiento():
     """Carga la base de conocimiento desde el archivo.
@@ -84,16 +75,12 @@ def cargar_conocimiento():
     with open(ARCHIVO_CONOCIMIENTO, "r", encoding="utf-8") as f:
         return json.load(f)
 
-
 # ======================================================
 # FUNCIONES DE INTERACCIÓN
 # ======================================================
 
 def mostrar_menu_respuesta(pregunta):
-    """
-    Muestra una pregunta con un menú de opciones tipo switch
-    y devuelve la respuesta seleccionada como texto.
-    """
+    """Muestra una pregunta con un menú de opciones tipo switch y devuelve la respuesta seleccionada."""
     print(f"\n{pregunta}")
     print("1. Si")
     print("2. No")
@@ -116,6 +103,22 @@ def mostrar_menu_respuesta(pregunta):
         except ValueError:
             print("⚠️ Debes ingresar un número entre 1 y 4.")
 
+def menu_confirmacion(pregunta):
+    """Muestra un menú tipo switch (1–2) para preguntas de confirmación como '¿Adiviné?' o '¿Jugar de nuevo?'."""
+    print(f"\n{pregunta}")
+    print("1. Si")
+    print("2. No")
+    while True:
+        try:
+            opcion = int(input("Selecciona una opción (1-2): "))
+            if opcion == 1:
+                return "Si"
+            elif opcion == 2:
+                return "No"
+            else:
+                print("⚠️ Opción fuera de rango. Intenta de nuevo.")
+        except ValueError:
+            print("⚠️ Debes ingresar un número (1 o 2).")
 
 def obtener_respuestas():
     """Realiza las 5 preguntas al usuario y devuelve sus respuestas."""
@@ -124,7 +127,6 @@ def obtener_respuestas():
         respuesta = mostrar_menu_respuesta(pregunta)
         respuestas[claves[i]] = respuesta
     return respuestas
-
 
 def comparar_personaje(respuestas_usuario, caracteristicas_personaje):
     """Devuelve un puntaje de coincidencia (0 a 1) entre las respuestas del usuario y un personaje."""
@@ -136,77 +138,64 @@ def comparar_personaje(respuestas_usuario, caracteristicas_personaje):
             coincidencias += 0.5
     return coincidencias / len(respuestas_usuario)
 
-
 # ======================================================
 # LÓGICA PRINCIPAL DEL JUEGO
 # ======================================================
 
-def jugar():
-    """Ejecución principal del juego."""
-    while True:
-        limpiar_pantalla()
-        base = cargar_conocimiento()
+"""Ejecución principal del juego."""
+while True:
+    base = cargar_conocimiento()
 
-        print("🎮 Bienvenido a '¿Quién soy? - Hollow Knight Edition' 🦋")
-        print("Piensa en un personaje del juego. Yo intentaré adivinarlo.")
-        input("Presiona ENTER cuando estés listo...\n")
+    print("\n🎮 Bienvenido a '¿Quién soy? - Hollow Knight Edition' 🦋")
+    print("Piensa en un personaje del juego. Yo intentaré adivinarlo.")
+    input("Presiona ENTER cuando estés listo...\n")
 
-        # El jugador responde las 5 preguntas
-        respuestas = obtener_respuestas()
+    # El jugador responde las 5 preguntas
+    respuestas = obtener_respuestas()
 
-        # Calcular coincidencias con la base de conocimiento
-        puntajes = {}
-        for nombre, caracteristicas in base.items():
-            puntajes[nombre] = comparar_personaje(respuestas, caracteristicas)
+    # Calcular coincidencias con la base de conocimiento
+    puntajes = {}
+    for nombre, caracteristicas in base.items():
+        puntajes[nombre] = comparar_personaje(respuestas, caracteristicas)
 
-        # Obtener el personaje más probable
-        mejor = max(puntajes, key=puntajes.get)
-        valor = puntajes[mejor]
+    # Obtener el personaje más probable
+    mejor = max(puntajes, key=puntajes.get)
+    valor = puntajes[mejor]
 
-        print("\n🤔 Estoy pensando...")
-        time.sleep(1.5)
+    print("\n🤔 Estoy pensando...")
+    time.sleep(1.5)
 
-        # Mostrar resultado
-        print(f"\nCreo que tu personaje es: 🕵️‍♂️ **{mejor}** (confianza: {round(valor * 100, 1)}%)")
+    # Mostrar resultado
+    print(f"\nCreo que tu personaje es: 🕵️‍♂️ {mejor} (confianza: {round(valor * 100, 1)}%)")
 
-        # Confirmación del usuario
-        confirmacion = input("¿Adiviné tu personaje? (Si / No): ").strip().capitalize()
+    # Confirmación del usuario con menú
+    confirmacion = menu_confirmacion("¿Adiviné tu personaje?")
 
-        if confirmacion == "Si":
-            # Si adivina correctamente, preguntar si desea jugar otra vez
-            jugar_nuevamente = input("¿Quieres jugar de nuevo? (Si / No): ").strip().capitalize()
-            if jugar_nuevamente == "Si":
-                limpiar_pantalla()
-                continue
-            else:
-                print("\n¡Gracias por jugar! 🌙")
-                break
+    if confirmacion == "Si":
+        # Si adivina correctamente, preguntar si desea jugar otra vez
+        jugar_nuevamente = menu_confirmacion("¿Quieres jugar de nuevo?")
+        if jugar_nuevamente == "Si":
+            continue
         else:
-            # Si no adivina, aprender un nuevo personaje
-            print("\nVaya, parece que no acerté 😕")
-            nombre_nuevo = input("¿Cuál era tu personaje?: ").strip()
-            print(f"\nVamos a aprender sobre {nombre_nuevo}. Responde las siguientes preguntas:")
+            print("\n¡Gracias por jugar! 🌙")
+            break
+    else:
+        # Si no adivina, aprender un nuevo personaje
+        print("\nVaya, parece que no acerté 😕")
+        nombre_nuevo = input("¿Cuál era tu personaje?: ").strip()
+        print(f"\nVamos a aprender sobre {nombre_nuevo}. Responde las siguientes preguntas:")
 
-            nuevo_info = {}
-            for clave, pregunta in zip(claves, preguntas):
-                nuevo_info[clave] = mostrar_menu_respuesta(pregunta)
+        nuevo_info = {}
+        for clave, pregunta in zip(claves, preguntas):
+            nuevo_info[clave] = mostrar_menu_respuesta(pregunta)
 
-            base[nombre_nuevo] = nuevo_info
-            guardar_conocimiento(base)
-            print(f"\n✅ He aprendido sobre {nombre_nuevo} para la próxima vez.")
+        base[nombre_nuevo] = nuevo_info
+        guardar_conocimiento(base)
+        print(f"\n✅ He aprendido sobre {nombre_nuevo} para la próxima vez.")
 
-            jugar_nuevamente = input("\n¿Quieres jugar otra vez? (Si / No): ").strip().capitalize()
-            if jugar_nuevamente == "Si":
-                limpiar_pantalla()
-                continue
-            else:
-                print("\n¡Gracias por ayudarme a aprender! 🌟")
-                break
-
-
-# ======================================================
-# EJECUCIÓN
-# ======================================================
-
-if __name__ == "__main__":
-    jugar()
+        jugar_nuevamente = menu_confirmacion("\n¿Quieres jugar otra vez?")
+        if jugar_nuevamente == "Si":
+            continue
+        else:
+            print("\n¡Gracias por ayudarme a aprender! 🌟")
+            break

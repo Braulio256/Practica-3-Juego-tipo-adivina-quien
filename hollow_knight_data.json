@@ -33,5 +33,12 @@
         "rol_jefe": "No",
         "es_enemigo": "No",
         "aparece_multiples": "No"
+    },
+    "Mantis": {
+        "arma_aguijon": "No",
+        "arma_infeccion": "No",
+        "rol_jefe": "No",
+        "es_enemigo": "Si",
+        "aparece_multiples": "Si"
     }
 }
