@@ -87,7 +87,7 @@ def comparar_personaje(respuestas_usuario, caracteristicas_personaje):
     return coincidencias / len(respuestas_usuario)
 
 # =========================================
-# CLASE PRINCIPAL DEL JUEGO (INTERFAZ)
+# CLASE PRINCIPAL DEL JUEGO
 # =========================================
 class JuegoAdivinaQuien:
     def __init__(self, root):
@@ -100,18 +100,49 @@ class JuegoAdivinaQuien:
         self.respuestas = {}
         self.indice_pregunta = 0
 
-        self.label = tk.Label(root, text="Bienvenido a ¿Adivina Quién?\nPresiona 'Comenzar' para jugar",
+        # --- Frame principal (para cambiar entre menú y juego)
+        self.frame_principal = tk.Frame(root)
+        self.frame_principal.pack(expand=True, fill="both")
+
+        # --- Crear menú principal
+        self.crear_menu_principal()
+
+    # ==============================
+    # MENÚ PRINCIPAL
+    # ==============================
+    def crear_menu_principal(self):
+        for widget in self.frame_principal.winfo_children():
+            widget.destroy()
+
+        label = tk.Label(self.frame_principal, text="¿Adivina Quién? - Hollow Knight Edition",
+                         font=("Arial", 16, "bold"), pady=40)
+        label.pack()
+
+        btn_jugar = tk.Button(self.frame_principal, text="Jugar", width=20, height=2,
+                              font=("Arial", 12), command=self.iniciar_juego)
+        btn_jugar.pack(pady=10)
+
+        btn_salir = tk.Button(self.frame_principal, text="Salir", width=20, height=2,
+                              font=("Arial", 12), command=self.root.destroy)
+        btn_salir.pack(pady=10)
+
+    # ==============================
+    # JUEGO
+    # ==============================
+    def iniciar_juego(self):
+        for widget in self.frame_principal.winfo_children():
+            widget.destroy()
+
+        self.respuestas = {}
+        self.indice_pregunta = 0
+
+        self.label = tk.Label(self.frame_principal, text=preguntas[0],
                               font=("Arial", 14), wraplength=500, justify="center")
         self.label.pack(pady=40)
 
-        self.frame_botones = tk.Frame(root)
+        self.frame_botones = tk.Frame(self.frame_principal)
         self.frame_botones.pack()
 
-        self.boton_comenzar = tk.Button(root, text="Comenzar", font=("Arial", 12, "bold"), command=self.iniciar_juego)
-        self.boton_comenzar.pack(pady=20)
-
-    def iniciar_juego(self):
-        self.boton_comenzar.pack_forget()
         self.mostrar_pregunta()
 
     def mostrar_pregunta(self):
@@ -148,17 +179,17 @@ class JuegoAdivinaQuien:
 
     def confirmar_acierto(self):
         if messagebox.askyesno("Jugar otra vez", "¡Genial! ¿Quieres jugar de nuevo?"):
-            self.reiniciar_juego()
+            self.iniciar_juego()
         else:
-            self.root.destroy()
+            self.crear_menu_principal()
 
     def no_acerto(self):
         for widget in self.frame_botones.winfo_children():
             widget.destroy()
         self.label.config(text="¿Cuál era tu personaje?")
-        self.entry_nombre = tk.Entry(self.root, font=("Arial", 12))
+        self.entry_nombre = tk.Entry(self.frame_principal, font=("Arial", 12))
         self.entry_nombre.pack(pady=10)
-        tk.Button(self.root, text="Continuar", command=self.aprender_personaje).pack(pady=5)
+        tk.Button(self.frame_principal, text="Continuar", command=self.aprender_personaje).pack(pady=5)
 
     def aprender_personaje(self):
         nombre = self.entry_nombre.get().strip()
@@ -187,26 +218,16 @@ class JuegoAdivinaQuien:
             self.base[self.nuevo_personaje] = self.respuestas_aprendizaje
             guardar_conocimiento(self.base)
             messagebox.showinfo("Aprendido", f"He aprendido sobre {self.nuevo_personaje}. ¡Gracias!")
-            self.reiniciar_juego()
+            self.crear_menu_principal()
 
     def registrar_aprendizaje(self, respuesta):
         self.respuestas_aprendizaje[claves[self.indice_aprendizaje]] = respuesta
         self.indice_aprendizaje += 1
         self.preguntar_aprendizaje()
 
-    def reiniciar_juego(self):
-        self.respuestas = {}
-        self.indice_pregunta = 0
-        self.label.config(text="Presiona 'Comenzar' para jugar nuevamente")
-        for widget in self.frame_botones.winfo_children():
-            widget.destroy()
-        self.boton_comenzar.pack(pady=20)
-
-
 # =========================================
-# EJECUCIÓN
+# EJECUCIÓN DIRECTA
 # =========================================
-
 root = tk.Tk()
-app = JuegoAdivinaQuien(root)
+JuegoAdivinaQuien(root)
 root.mainloop()

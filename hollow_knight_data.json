@@ -17,7 +17,7 @@
         "arma_aguijon": "Si",
         "arma_infeccion": "No",
         "rol_jefe": "Si",
-        "es_enemigo": "No",
+        "es_enemigo": "Si",
         "aparece_multiples": "Si"
     },
     "Último Ciervo": {
@@ -32,20 +32,6 @@
         "arma_infeccion": "No",
         "rol_jefe": "No",
         "es_enemigo": "No",
-        "aparece_multiples": "No"
-    },
-    "Mantis": {
-        "arma_aguijon": "No",
-        "arma_infeccion": "No",
-        "rol_jefe": "No",
-        "es_enemigo": "Si",
-        "aparece_multiples": "Si"
-    },
-    "Nosk": {
-        "arma_aguijon": "No",
-        "arma_infeccion": "Si",
-        "rol_jefe": "Si",
-        "es_enemigo": "Si",
         "aparece_multiples": "No"
     }
 }
