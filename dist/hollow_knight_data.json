@@ -17,7 +17,7 @@
         "arma_aguijon": "Si",
         "arma_infeccion": "No",
         "rol_jefe": "Si",
-        "es_enemigo": "No",
+        "es_enemigo": "Si",
         "aparece_multiples": "Si"
     },
     "Último Ciervo": {
@@ -40,5 +40,12 @@
         "rol_jefe": "Si",
         "es_enemigo": "Si",
         "aparece_multiples": "No"
+    },
+    "Madre Gruz": {
+        "arma_aguijon": "No",
+        "arma_infeccion": "No",
+        "rol_jefe": "Si",
+        "es_enemigo": "Si",
+        "aparece_multiples": "Si"
     }
 }

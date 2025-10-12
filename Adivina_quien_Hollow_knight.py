@@ -36,7 +36,7 @@ base_inicial = {
         "arma_aguijon": "Si",
         "arma_infeccion": "No",
         "rol_jefe": "Si",
-        "es_enemigo": "No",
+        "es_enemigo": "Si",
         "aparece_multiples": "Si"
     },
     "Último Ciervo": {
@@ -153,7 +153,6 @@ while True:
     base = cargar_conocimiento()
 
     print("\n Bienvenido a '¿Adivina quien? - Hollow Knight Edition' ")
-    print("Piensa en un personaje del juego. Yo intentaré adivinarlo.")
     input("Presiona ENTER cuando estés listo...\n")
 
     # El jugador responde las 5 preguntas
