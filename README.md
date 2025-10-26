@@ -1,3 +1,3 @@
 # Practica-3-Juego-tipo-adivina-quien
 
-Archivo .exe en carpeta dist
+Este es un juego tipo akinator sobre el juego de hollow knight 
