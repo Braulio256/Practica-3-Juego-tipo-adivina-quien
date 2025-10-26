@@ -1,0 +1,59 @@
+==================================
+
+Archivo .gitignore para un proyecto de Python
+
+==================================
+
+--- Peticiones del Usuario ---
+
+Ignorar la carpeta del IDE (PyCharm, IntelliJ, etc.)
+
+El '/' al final asegura que solo ignore carpetas
+
+/.idea/
+
+Ignorar los scripts de compilacion
+
+generar_exe.bat
+Generar_EXE.bat
+Generar_EXE_Corregido.bat
+
+--- Archivos de Python ---
+
+Entornos virtuales
+
+Nunca subas tus librerías instaladas
+
+/venv/
+/*.venv/
+/env/
+/ENV/
+
+Cache de Python y archivos compilados
+
+pycache/
+*.pyc
+*.pyo
+*.pyd
+
+--- Archivos de PyInstaller ---
+
+Carpetas generadas durante la compilacion
+
+/build/
+/dist/
+
+El archivo de especificacion de PyInstaller
+
+*.spec
+
+--- Otros Archivos Comunes de IDE ---
+
+Visual Studio Code
+
+/.vscode/
+
+Archivos de logs
+
+*.log
+.log.
