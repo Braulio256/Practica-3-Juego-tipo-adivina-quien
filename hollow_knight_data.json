@@ -6,13 +6,6 @@
         "es_enemigo": "No",
         "aparece_multiples": "Si"
     },
-    "Señores Mantis": {
-        "arma_aguijon": "Si",
-        "arma_infeccion": "No",
-        "rol_jefe": "Si",
-        "es_enemigo": "Si",
-        "aparece_multiples": "No"
-    },
     "Zote": {
         "arma_aguijon": "Si",
         "arma_infeccion": "No",
@@ -20,25 +13,18 @@
         "es_enemigo": "Si",
         "aparece_multiples": "Si"
     },
-    "Último Ciervo": {
-        "arma_aguijon": "No",
+    "Señores Mantis": {
+        "arma_aguijon": "Si",
         "arma_infeccion": "No",
-        "rol_jefe": "No",
-        "es_enemigo": "No",
-        "aparece_multiples": "Si"
-    },
-    "Rey Pálido": {
-        "arma_aguijon": "No",
-        "arma_infeccion": "No",
-        "rol_jefe": "No",
-        "es_enemigo": "No",
+        "rol_jefe": "Si",
+        "es_enemigo": "Si",
         "aparece_multiples": "No"
     },
-    "Mantis": {
-        "arma_aguijon": "No",
-        "arma_infeccion": "No",
-        "rol_jefe": "No",
-        "es_enemigo": "Si",
-        "aparece_multiples": "Si"
+    "No Lo Sé": {
+        "arma_aguijon": "No lo se",
+        "arma_infeccion": "No lo se",
+        "rol_jefe": "No lo se",
+        "es_enemigo": "No lo se",
+        "aparece_multiples": "No lo se"
     }
 }
