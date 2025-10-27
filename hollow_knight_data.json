@@ -22,6 +22,16 @@
     },
     "Hollow Knight": {
         "arma_aguijon": "Si",
-        "arma_infeccion": "Si"
+        "arma_infeccion": "Si",
+        "rol_jefe": "Si",
+        "es_enemigo": "Si",
+        "aparece_multiples": "No"
+    },
+    "Receptaculo Roto": {
+        "arma_aguijon": "Si",
+        "arma_infeccion": "Si",
+        "rol_jefe": "Si",
+        "es_enemigo": "Si",
+        "aparece_multiples": "Si"
     }
 }
