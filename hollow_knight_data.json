@@ -20,11 +20,8 @@
         "es_enemigo": "Si",
         "aparece_multiples": "No"
     },
-    "No Lo Sé": {
-        "arma_aguijon": "No lo se",
-        "arma_infeccion": "No lo se",
-        "rol_jefe": "No lo se",
-        "es_enemigo": "No lo se",
-        "aparece_multiples": "No lo se"
+    "Hollow Knight": {
+        "arma_aguijon": "Si",
+        "arma_infeccion": "Si"
     }
 }
